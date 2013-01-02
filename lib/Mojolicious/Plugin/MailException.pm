@@ -47,7 +47,7 @@ Hash with headers that have to be added to mail
 
 =item send
 
-Subroutine that is used to send the mail, example:
+Subroutine that can be used to send the mail, example:
 
     sub startup {
         my ($self) = @_;
@@ -67,7 +67,7 @@ See L<Mojo::Exception>.
 
 =back
 
-=head2 COPYRIGHT AND LICENCE
+=head1 COPYRIGHT AND LICENCE
 
  Copyright (C) 2012 by Dmitry E. Oboukhov <unera@debian.org>
  Copyright (C) 2012 by Roman V. Nikolaev <rshadow@rambler.ru>
@@ -80,7 +80,7 @@ at your option, any later version of Perl 5 you may have available.
 
 package Mojolicious::Plugin::MailException;
 
-our $VERSION = '0.02';
+our $VERSION = '0.04';
 use 5.008008;
 use strict;
 use warnings;
@@ -110,7 +110,7 @@ my $mail_prepare = sub {
     $text .= $e->message;
     $text .= "\n";
 
-    my $maxl = length $e->lines_after->[-1][0];
+    my $maxl = eval { length $e->lines_after->[-1][0]; };
     $maxl ||= 5;
     $text .= sprintf "   %*d %s\n", $maxl, @{$_}[0,1] for @{ $e->lines_before };
     $text .= sprintf " * %*d %s\n", $maxl, @{ $e->line }[0,1];
@@ -180,9 +180,10 @@ sub register {
         local $SIG{__DIE__} = sub {
             my ($e) = @_;
             my @caller = caller;
-            $e = Mojo::Exception->new($e, @caller[1, 2]) unless ref $e;
+            $e = Mojo::Exception->new(
+                sprintf '%s at %s line %d', $e, @caller[1,2]) unless ref $e;
             my @frames;
-            for (my $i = 1; caller($i); $i++) {
+            for (my $i = 0; caller($i); $i++) {
                 push @frames => [ caller $i ];
             }
             $e->frames(\@frames);
