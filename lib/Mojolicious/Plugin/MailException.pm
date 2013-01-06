@@ -80,7 +80,7 @@ at your option, any later version of Perl 5 you may have available.
 
 package Mojolicious::Plugin::MailException;
 
-our $VERSION = '0.06';
+our $VERSION = '0.07';
 use 5.008008;
 use strict;
 use warnings;
@@ -113,7 +113,7 @@ my $mail_prepare = sub {
     my $maxl = eval { length $e->lines_after->[-1][0]; };
     $maxl ||= 5;
     $text .= sprintf "   %*d %s\n", $maxl, @{$_}[0,1] for @{ $e->lines_before };
-    $text .= sprintf " * %*d %s\n", $maxl, @{ $e->line }[0,1];
+    $text .= sprintf " * %*d %s\n", $maxl, @{ $e->line }[0,1] if $e->line->[0];
     $text .= sprintf "   %*d %s\n", $maxl, @{$_}[0,1] for @{ $e->lines_after };
 
     if (@{ $e->frames }) {
