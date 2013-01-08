@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               Mojolicious-Plugin-MailException
-version:            0.08
+version:            0.09
 abstract:           Mojolicious plugin to send crash information by email
 author:
     - Dmitry E. Oboukhov <unera@debian.org>

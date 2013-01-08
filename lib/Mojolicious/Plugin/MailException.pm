@@ -13,7 +13,7 @@ Mojolicious::Plugin::MailException - Mojolicious plugin to send crash informatio
         $self->plugin(MailException => {
             from    => 'robot@my.site.com',
             to      => 'mail1@my.domain.com, mail2@his.domain.com',
-            sublect => 'My site crashed!',
+            subject => 'My site crashed!',
             headers => {
                 'X-MySite' => 'crashed'
             }
@@ -61,7 +61,7 @@ Subroutine that can be used to send the mail, example:
         });
     }
 
-In the function You can send email by yoursef and (or) prepare and
+In the function You can send email by yourself and (or) prepare and
 send Your own mail (sms, etc) message using B<$exception> object.
 See L<Mojo::Exception>.
 
@@ -85,7 +85,7 @@ at your option, any later version of Perl 5 you may have available.
 
 package Mojolicious::Plugin::MailException;
 
-our $VERSION = '0.08';
+our $VERSION = '0.09';
 use 5.008008;
 use strict;
 use warnings;
