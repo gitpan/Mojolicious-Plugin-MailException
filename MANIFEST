@@ -11,4 +11,5 @@ debian/libmojolicious-plugin-mailexception-perl.docs
 debian/rules
 debian/source/format
 debian/watch
+Changes
 META.yml                                 Module meta-data (added by MakeMaker)
