@@ -1,4 +1,11 @@
-libmojolicious-plugin-mailexception-perl (0.16-1) nowtaxi; urgency=low
+libmojolicious-plugin-mailexception-perl (0.17-1) unstable; urgency=low
+
+  * New release, closes: #713231
+   - New Mojo uses render(text => $text) instead reder_text($text).
+
+ -- Dmitry E. Oboukhov <unera@debian.org>  Sat, 17 Aug 2013 12:09:17 +0400
+
+libmojolicious-plugin-mailexception-perl (0.16-1) unstable; urgency=low
 
   * Works properly if client's application redefines $SIG{__DIE__}, too.
 
